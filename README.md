@@ -1,6 +1,6 @@
 # MACHINE-LEARNING
 
-### OK, so what exactly is machine learning? 
+### OK, so what exactly is machine learning?  
 
 To define machine learning, first let’s define a more general term: artificial intelligence.
 
