@@ -91,3 +91,32 @@ For example, if the question is, “Will it rain today?,” the process to make 
 
 We may be right or wrong, but at least we are trying to make the most accurate prediction we can
 based on the information we have.
+
+## Models and Algorithms
+
+**Model:** A set of rules that represent our data and can be used to make predictions
+
+**Algorithm:** A procedure, or a set of steps, used to solve a problem or perform a computation. The goal of an algorithm is to build a model.
+
+In short, a model is what we use to make predictions, and an algorithm is what we use to build
+the model. Those two definitions are easy to confuse and are often interchanged, but to keep
+them clear.
+
+### Some examples of models that humans use
+
+In this section we focus on a common application of machine learning: spam detection.
+
+In the following examples, we will detect spam and non-spam emails. Non-spam emails are also
+referred to as **ham**.
+
+**spam and ham:** **_Spam_** is the common term used for junk or unwanted email, such as chain letters, promotions, and so on. The term comes from a 1972 Monty Python sketch in which every item in the menu of a restaurant contained Spam as an ingredient. 
+
+Among software developers, the term **_ham_** is used to refer to non-spam emails.
+
+#### Example: An annoying email friend
+
+In this example, our friend Bob likes to send us email. A lot of his emails are spam, in the form of chain letters. We are starting to get a bit annoyed with him. It is Saturday, and we just got a notification of an email from Bob. Can we guess if this email is spam or ham without looking at it?
+
+To figure this out, we use the remember-formulate-predict method. First, let us remember,
+say, the last 10 emails that we got from Bob. That is our data. We remember that six of them were
+spam, and the other four were ham.
