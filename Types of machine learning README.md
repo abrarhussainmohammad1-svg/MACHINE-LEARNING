@@ -139,5 +139,6 @@ Other places where one can use regression models follow:
 
 • **Stock market:** predicting the price of a certain stock based on other stock prices and 
 other market signals
+
 • **Medicine:** predicting the expected life span of a patient or the expected recovery time, 
 based on symptoms and the medical history of the patient
