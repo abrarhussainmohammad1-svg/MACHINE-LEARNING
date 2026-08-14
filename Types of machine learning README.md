@@ -69,7 +69,8 @@ An example of labeled data is a dataset of emails that comes with a column that 
 
 An example of unlabeled data is a dataset of emails that has no particular column we are interested in predicting.
 
-.....img
+<img width="576" height="219" alt="image" src="https://github.com/user-attachments/assets/e95faa0d-74ae-4c8d-9603-00a7dcbfe941" />
+
 
 We see three datasets containing images of pets. The first dataset has a column 
 recording the type of pet, and the second dataset has a column specifying the weight of the pet. These two are examples of labeled data. The third dataset consists only of images, with no label, making it unlabeled data.
@@ -95,7 +96,8 @@ A supervised learning model predicts the label of a new data point. In this case
 The framework we learned for making a decision was **remember-formulate-predict**. This is precisely how supervised learning works. The model first **remembers** the dataset of dogs and cats. Then it **formulates** a model, or a rule, for what it believes constitutes a 
 dog and a cat. Finally, when a new image comes in, the model makes a **prediction** about what it thinks the label of the image is, namely, a dog or a cat.
 
-......
+<img width="539" height="254" alt="image" src="https://github.com/user-attachments/assets/90925372-b4cf-42fd-b66d-d6c4dbb7779d" />
+
 
 Numbers and states are the two types of data that we’ll encounter in supervised learning models. We call the first type **_numerical data_** and the second type **_categorical data_**. 
 
@@ -204,18 +206,21 @@ Now let’s look at the **second example**, the dataset of emails. Because the d
 Let’s look at the dataset in below table, which contains nine emails that we would 
 like to cluster. The features of the dataset are the size of the email and the number of recipients.
 
-----
+<img width="387" height="249" alt="image" src="https://github.com/user-attachments/assets/5df08873-2aa4-4b90-9895-345dce5edfa5" />
 
-we have group the emails by their number of recipients. This would result in two clusters: one with emails having two or fewer recipients, and one with emails 
+
+we have grouped the emails by their number of recipients. This would result in two clusters: one with emails having two or fewer recipients, and one with emails 
 having five or more recipients. We could also try to group them into three groups by size.But you can imagine that as the table gets larger and larger, eyeballing the groups gets harder and harder. 
 
------
+<img width="575" height="299" alt="image" src="https://github.com/user-attachments/assets/3858f354-fba9-4cb2-95a6-dcdff2ad6716" />
+
 
 A plot of the email dataset. The horizontal axis corresponds to the size of the email and the vertical axis to the number of recipients. We can see three well-defined clusters in this dataset.
 
 We can see three well-defined clusters, which are highlighted
 
-----
+<img width="567" height="284" alt="image" src="https://github.com/user-attachments/assets/9def82bb-1f91-44aa-ad6d-f81f27ddd414" />
+
 
 We can cluster the emails into three categories based on size and number of recipients.
 This last step is what clustering is all about.  
@@ -258,7 +263,83 @@ Dimensionality reduction is a useful preprocessing step that we can apply to vas
 For example, let’s go back to the housing dataset. 
 
 Imagine that the features are the following:
+
 • Size
+
 • Number of bedrooms
+
 • Number of bathrooms
 
+• Crime rate in the neighborhood
+
+• Distance to the closest school
+
+This dataset has five columns of data. What if we wanted to turn the dataset into a simpler one with fewer columns, without losing a lot of information? Let’s do this by using common sense. Take a closer look at the five features. Can you see any way to simplify them—perhaps to group them into some smaller and more general categories?
+After a careful look, we can see that the first three features are similar, because they are all related to the size of the house. Similarly, the fourth and fifth features are similar to each other, because they are related to the quality of the neighborhood. We could condense the first three features into a big “size” feature, and the fourth and fifth into a big “neighborhood quality” feature. How do we condense the size features? We could forget about rooms and bedrooms and consider only the size; we could add the number of bedrooms and bathrooms or maybe take some other combination of the three features. We could also condense the area quality features
+in similar ways. 
+
+**Dimensionality reduction algorithms** will find good ways to condense these features, losing as little information as possible and keeping our data as intact as possible while managing to simplify it for easier process and storage.
+
+<img width="568" height="237" alt="image" src="https://github.com/user-attachments/assets/a36934fe-9eb8-4b45-b45a-48f682a8ec05" />
+
+Dimensionality reduction algorithms help us simplify our data. On the left, we have a housing dataset with many features. We can use dimensionality reduction to reduce the number of features in the dataset without losing much information and obtain the dataset on the right.
+
+### Other ways of simplifying our data:
+#### Matrix factorization and singular value decomposition
+
+Clustering can be used to simplify our data by reducing the number of rows in our dataset by grouping several rows into one.
+
+<img width="548" height="234" alt="image" src="https://github.com/user-attachments/assets/d1e02764-291f-47ad-9088-7f0adcf08f5c" />
+
+Dimensionality reduction can be used to simplify our data by reducing the number of columns in our dataset.
+
+<img width="375" height="483" alt="image" src="https://github.com/user-attachments/assets/a5bea604-b264-4b09-aa57-9eb9f797a1eb" />
+
+### Generative machine learning
+Generative machine learning is one of the most astonishing fields of machine learning. If you have seen ultra-realistic faces, images, or videos created by computers, then you have seen generative machine learning in action.
+
+The field of generative learning consists of models that, given a dataset, can output new data points that look like samples from that original dataset. These algorithms are forced to learn how the data looks to produce similar data points. 
+
+For example:-
+If the dataset contains images of faces, then the algorithm will produce realistic-looking faces. Generative algorithms have been able to create tremendously realistic images, paintings, and so on. They have also generated video, music, stories, poetry, and many other wonderful things. The most popular generative algorithm is **generative adversarial networks (GANs)**, developed by **Ian Goodfellow and his coauthors.**
+Other useful and popular generative algorithms are **variational autoencoders**, developed by **Kingma and Welling**, and restricted **Boltzmann machines (RBMs)**, developed by **Geoffrey Hinton.**
+
+As you can imagine, generative learning is quite hard. For a human, it is much easier to determine if an image shows a dog than it is to draw a dog. This task is just as hard for computers.
+
+Thus, the algorithms in generative learning are complicated, and lots of data and computing power are needed to make them work well.
+
+## What is reinforcement learning?
+Reinforcement learning is a different type of machine learning in which no data is given, and we must get the computer to perform a task. Instead of data, the model receives an environment and an agent who is supposed to navigate in this environment. The agent has a goal or a set of goals.
+
+The environment has rewards and punishments that guide the agent to make the right decisions to reach its goal. 
+This all sounds a bit abstract, but let’s look at an example.
+
+Example: Grid world
+In figure,
+A grid world in which our agent is a robot. The goal of the robot is to find the treasure chest, while avoiding the dragon. The mountain represents a place through which the robot can’t pass.
+
+<img width="596" height="318" alt="image" src="https://github.com/user-attachments/assets/453af061-e14c-4fce-b9e5-6810a9505a1a" />
+
+
+We see a grid world with a robot at the bottom-left corner. That is our agent. The goal is to get to the treasure chest in the top right of the grid. In the grid, we can also see a mountain, which means we cannot go through that square, because the robot cannot climb mountains. We also see a dragon, which will attack the robot, should the robot dare to land in its square, which means that part of our goal is to not land over there. This is the game. And to give the robot information about how to proceed, we keep track of a score. The score starts at zero. If the robot gets to the treasure chest, then we gain 100 points. If the robot reaches the dragon, we
+lose 50 points. And to make sure our robot moves quickly, we can say that for every step the robot makes, we lose 1 point, because the robot loses energy as it walks.
+
+The way to train this algorithm, in very rough terms, follows: 
+
+The robot starts walking around, recording its score and remembering what steps took it there. After some point, it may meet the dragon, losing many points. Therefore, it learns to associate the dragon square, and the squares close to it with low scores. At some point it may also hit the treasure chest, and it learns to start associating that square and the squares close to it to high scores. After playing this game for a long time, the robot will have a good idea of how good each square is, and it can take the path following the squares all the way to the treasure chest. 
+
+In figure 2, a possible path, although this one is not ideal, because it passes too close to the dragon. Can you think of a better one?
+
+<img width="588" height="372" alt="image" src="https://github.com/user-attachments/assets/75849a01-6f19-4cd6-9904-f1327684a2d9" />
+
+Here is a path that the robot could take to find the treasure chest.
+
+Of course, this is a very brief explanation, and there is a lot more to reinforcement learning.
+
+Reinforcement learning has numerous cutting-edge applications, including the following:
+
+• **Games:** recent advances in teaching computers how to win at games, such as Go or chess, use reinforcement learning. Also, agents have been taught to win at Atari games such as Breakout or Super Mario.
+
+• **Robotics:** reinforcement learning is used extensively to help robots carry out tasks such as picking up boxes, cleaning a room, or even dancing!
+
+• **Self-driving cars:** reinforcement learning techniques are used to help the car carry out many tasks such as path planning or behaving in particular environments.
