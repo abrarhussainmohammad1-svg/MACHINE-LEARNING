@@ -9,7 +9,8 @@ To understand linear regression, all
 you need is the ability to visualize points and lines moving around.
 Let’s say that we have some points that roughly look like they are forming a line. 
 
-----
+<img width="497" height="211" alt="image" src="https://github.com/user-attachments/assets/37250661-c079-4bcc-ab8b-573c5a86a8c8" />
+
 Some points that roughly look like they are forming a line
 
 The goal of linear regression is to draw the line that passes as close to these points as possible. 
@@ -18,7 +19,8 @@ Think of the points as houses in a town, and our goal is to build a road that go
 town. We want the line to pass as close as possible to the points because the town’s inhabitants all 
 want to live close to the road, and our goal is to please them as much as we can.
 
-----
+<img width="505" height="216" alt="image" src="https://github.com/user-attachments/assets/064ccbb5-50fe-4069-acc1-876a758eb021" />
+
 A line that passes close to the points
 
 We can also imagine the points as magnets lying bolted to the floor (so they can’t move). Now 
@@ -39,7 +41,8 @@ Let’s go with as simple an example as possible. We look at only one of the fea
 of rooms. Our house has four rooms, and there are six houses nearby, with one, two, three, five, 
 six, and seven rooms, respectively. Their prices are shown in table.
 
-----
+<img width="426" height="186" alt="image" src="https://github.com/user-attachments/assets/adcc86ce-aadb-4a1c-957a-7cd8308e59f3" />
+
 A table of houses with the number of rooms and prices. House 4 is the one whose 
 price we are trying to infer.
 
@@ -74,13 +77,14 @@ Now the question is, how did we come up with this formula? Or more specifically,
 A slightly more complicated dataset of houses with their number of rooms and 
 their price.
 
----
+<img width="377" height="187" alt="image" src="https://github.com/user-attachments/assets/2cd65541-bd9d-4692-aa64-9512d7cce428" />
 
 This dataset is similar to the previous one, except now the prices don’t follow a nice pattern, where each price is $50 more than the previous one. However, it’s not that far from the original dataset, so we can expect that a similar pattern should approximate these values well.
 
 Normally, the first thing we do when we get a new dataset is to plot it. In figure 3.3, we can see a plot of the points in a coordinate system in which the horizontal axis represents the number of rooms, and the vertical axis represents the price of the house.
 
----
+<img width="589" height="316" alt="image" src="https://github.com/user-attachments/assets/58d7c8f1-40d9-46c5-a5d0-e607ee467ea9" />
+
 
 #### The formulate step: Formulating a rule that estimates the price of the house
 The dataset in previous table is close enough to the one in this table, so for now, we can feel safe using the same formula for the price. The only difference is that now the prices are not exactly what the formula says, and we have a small error. We can write the equation as follows:
@@ -108,7 +112,8 @@ label to go up, when we increase the value of the feature by one unit. If the li
 
 We can now analyze the equation. When we say that the slope of the line is 50—this means that each time we add one room to the house, we estimate that the price of the house will go up by $50. When we say that the y-intercept of the line is 100, this means that the estimate for the price of a (hypothetical) house with zero rooms would be the base price of $100.
 
---
+<img width="577" height="314" alt="image" src="https://github.com/user-attachments/assets/83d7c7c7-72a9-4e03-b155-0548e6f19af4" />
+
 
 The model we formulate is the line that goes as close as possible to all the houses.
 
@@ -122,7 +127,44 @@ Price = 100 + 50 · 4 = 300
 
 Therefore, our model predicts that the house costs $300. This can also be seen graphically by using the line.
 
---
+<img width="578" height="296" alt="image" src="https://github.com/user-attachments/assets/2d4c7677-f997-4c2a-9896-1d16eb535c05" />
+
 
 Our task is now to predict the price of the house with four rooms. Using the model (line), we deduce 
 that the predicted price of this house is $300.
+
+### What if we have more variables? Multivariate linear regression
+
+We learned about a model that predicts the price of a house based on one feature—the number of rooms. We may imagine many other features that could help us predict the price of a house, such as the size, the quality of the schools in the neighborhood, and the age
+of the house. Can our linear regression model accommodate these other variables? Absolutely. When the only feature is the number of rooms, our model predicts the price as the sum of the
+feature times their corresponding weight, plus a bias. If we have more features, all we need to do
+is multiply them by their corresponding weights and add them to the predicted price. Therefore,
+a model for the price of a house could look like this:
+
+**Price = 30(number of rooms) + 1.5(size) + 10(quality of the schools) – 2(age of the house) + 50**
+
+In this equation, why are all of the weights positive, except for the one corresponding to the age
+of the house? The reason is the other three features (number of rooms, size, and quality of the schools) are positively correlated to the price of the house. In other words, because houses that
+are bigger and well located cost more, the higher this feature is, the higher we expect the price of the house to be. However, because we would imagine that older houses tend to be less expensive, the age feature is negatively correlated to the price of the house.
+What if the weight of a feature is zero? This happens when a feature is irrelevant to the price.
+
+Example:- imagine a feature that measured the number of neighbors whose last name starts
+with the letter A. This feature is mostly irrelevant to the price of the house, so we would expect
+that in a reasonable model, the weight corresponding to this feature is either zero or something
+very close to it.
+
+In a similar way, if a feature has a very high weight (whether negative or positive), we interpret
+this as the model telling us that that feature is important in determining the price of the house.
+In the previous model, it seems that the number of rooms is an important feature, because its
+weight is the largest (in absolute value).
+
+In the section called “Dimensionality reduction simplifies data without losing too much
+information”, we related the number of columns in a dataset to the dimension in
+which the dataset lives. Thus, a dataset with two columns can be represented as a set of points in the
+plane, and a dataset with three columns can be represented as a set of points in three-dimensional
+space. In such a dataset, a linear regression model corresponds not to a line but to a plane that
+passes as close as possible to the points. Imagine having many flies flying around in the room in
+a stationary position, and our task is to try to pass a gigantic cardboard sheet as close as we can
+to all the flies. This is multivariate linear regression with three variables. The problem becomes
+hard to visualize for datasets with more columns, but we can always imagine a linear equation
+with many variables.
