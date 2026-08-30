@@ -168,3 +168,190 @@ a stationary position, and our task is to try to pass a gigantic cardboard sheet
 to all the flies. This is multivariate linear regression with three variables. The problem becomes
 hard to visualize for datasets with more columns, but we can always imagine a linear equation
 with many variables.
+
+## How to get the computer to draw this line: The linear regression algorithm
+Now we get to the main question of this chapter: how do we get a computer to draw a line that
+passes really close to the points? The way we do this is the same way we do many things in
+machine learning: step by step. Start with a random line, and figure out a way to improve this
+line a little bit by moving it closer to the points. Repeat this process many times, and voilà, we
+have the desired line. This process is called the linear regression algorithm.
+The procedure may sound silly, but it works really well. Start with a random line. Pick a
+random point in the dataset and move the line slightly closer to that one point. Repeat this
+process many times, always picking a random point in the dataset. The pseudocode for the
+linear regression algorithm, viewed in this geometric fashion, follows:
+
+##### Pseudocode for the linear regression algorithm (geometric):
+
+**Inputs:** A dataset of points in the plane
+
+**Outputs:** A line that passes close to the points
+
+**Procedure:**
+
+• Pick a random line.
+
+• Repeat many times:
+
+– Pick a random data point.
+
+– Move the line a little closer to that point.
+
+• **Return** the line you’ve obtained.
+
+<img width="578" height="299" alt="image" src="https://github.com/user-attachments/assets/2602b013-7aa4-4034-8532-ca354ebd2a04" />
+
+An illustration of the linear regression algorithm. We start at the top left with a random line
+and end in the bottom left with a line that fits the dataset well. 
+
+At each stage, two things happen: 
+
+(1) we picka random point
+
+(2) the point asks the line to move closer to it. After many iterations, the line will be in
+a good position. This figure has only three iterations for illustrative purposes, but in real life, many more
+iterations are needed.
+
+
+That was the high-level view. To study the process more in detail, we need to go into the mathematical details.
+
+Let’s begin by defining some variables.
+
+• p: The price of a house in the dataset
+
+• pˆ = The predicted price of a house
+
+• r = The number of rooms
+
+• m = The price per room
+
+• b = The base price for a house
+
+The ^(hat) indicates that this is the variable that our model is predicting. In that way, we can tell the actual price of a house in the
+dataset from its predicted price.
+Thus, the equation of a linear regression model that predicts the price as the base price plus
+the price per room times the number of rooms is
+
+    pˆ = mr + b OR y = mx + c
+
+Predicted price = (Price per room)(Number of rooms) + Base price of the house
+
+To get an idea of the linear regression algorithm, imagine that we have a model in which the price
+per room is $40 and the base price of the house is $50. This model predicts the price of a house
+using the following formula:
+
+    pˆ = 40 · r + 50
+
+Imagine that in our dataset we have a house withtwo rooms that costs $150. This model predicts that the price of the house is 50 + 40 · 2 = 130.That is not a bad prediction, but it is less than the price of the house. How can we improve the
+model? It seems like the model’s mistake is thinking that the house is too cheap. Maybe the
+model has a low base price, or maybe it has a low price per room, or maybe both. If we increase
+both by a small amount, we may get a better estimate.
+
+Let’s increase the price per room by $0.50
+and the base price by $1. (I picked these numbers randomly.) The new equation follows:
+
+    pˆ = 40.5 · r + 51
+
+The new predicted price for the house is 40.5 · r + 51 = 132.
+
+Because $132 is closer to $150, our new model makes a better prediction for this house. Therefore, it is a better model for that data
+point. We don’t know if it is a better model for the other data points, but let’s not worry about
+that for now. The idea of the linear regression algorithm is to repeat the previous process many
+times. 
+
+Pseudocode for the linear regression algorithm:
+
+**Inputs:** A dataset of points
+
+**Outputs:** A linear regression model that fits that dataset
+
+**Procedure:**
+
+• Pick a model with random weights and a random bias.
+
+• Repeat many times:
+
+– Pick a random data point.
+
+– Slightly adjust the weights and bias to improve the prediction for that particular data
+point.
+
+• **Return** the model you’ve obtained.
+
+You may have a few questions, such as the following:
+
+• By how much should I adjust the weights?
+
+• How many times should I repeat the algorithm? In other words, how do I know when I’m
+done?
+
+• How do I know that this algorithm works?
+
+“The square trick” and “The absolute trick,” we learn some interesting tricks to find good values to adjust the weights.
+
+“The absolute error” and “The square error,” we see the error function, which will help
+us decide when to stop the algorithm. And “Gradient descent” is a
+powerful method, which justifies why this algorithm works. But first,
+let’s start by moving lines in the plane.
+
+#### The slope and y-intercept
+“The formulate step,” we talked about the equation of a line. We learn how to manipulate this equation to move our line. The equation of a line has the following two components:
+
+• The slope
+
+• The y-intercept (c)
+
+The slope tells us how steep the line is, and the y-intercept tells us where the line is located. The
+slope is defined as the rise divided by the run, and the y-intercept tells us where the line crosses the y-axis (the vertical axis).
+
+<img width="562" height="300" alt="image" src="https://github.com/user-attachments/assets/cdccca2a-8772-4671-8fe6-e6bc8a4a9c94" />
+
+The line with equation y = 0.5x + 2 has slope 0.5 (left) and y-intercept 2 (right).
+
+What does this equation mean? It means that the slope is 0.5, and the y-intercept is 2.
+When we say that the slope is 0.5, it means that when we walk along this line, for every unit
+that we move to the right, we are moving 0.5 units up. The slope can be zero if we don’t move up
+at all or negative if we move down. A vertical line has an undefined slope, but luckily, these don’t tend to show up in linear regression. Many lines can have the same slope. If I draw any line parallel to the line, this line will also rise 0.5 units for every unit it moves to the right.
+
+This is where the y-intercept comes in. The y-intercept tells us where the line cuts the y-axis. This line cuts the y-axis at height 2, and that is the y-intercept.
+
+The slope of the line tells us about the direction in which the line is pointing, and the
+y-intercept tells us the location of the line. Notice that by specifying the slope and the y-intercept,
+the line is completely specified. We can see different lines in fig with the same y-intercept,
+and different lines with the same slope.
+
+<img width="572" height="365" alt="image" src="https://github.com/user-attachments/assets/73b98e31-e126-469b-addd-6635d41d6dc7" />
+
+Some examples of slope and y-intercept. On the left, we see several lines with the same intercept
+and different slopes. Notice that the higher the slope, the steeper the line. On the right, we see several lines with
+the same slope and different y-intercepts. Notice that the higher the y-intercept, the higher the line is located.
+
+In housing example, the slope represents the price per room, and the y-intercept
+represents the base price of a house. Let’s keep this in mind, and, as we manipulate the lines,
+think of what this is doing to our housing price model.
+
+From the definitions of slope and y-intercept, we can deduce the following:
+
+**Changing the slope:**
+
+• If we increase the slope of a line, the line will rotate counterclockwise.
+• If we decrease the slope of a line, the line will rotate clockwise.
+
+These rotations are on the pivot, the point of intersection of the line and the y-axis.
+
+**Changing the y-intercept:**
+
+• If we increase the y-intercept of a line, the line is translated upward.
+
+• If we decrease the y-intercept of a line, the line is translated downward.
+
+These rotations and translations, which will come in handy when we want to
+adjust our linear regression models.
+
+<img width="593" height="260" alt="image" src="https://github.com/user-attachments/assets/0b5dfd79-4808-42b3-8884-075be37373e9" />
+
+Left: Increasing the slope rotates the line counterclockwise, whereas decreasing the slope rotates
+it clockwise.
+
+Right: Increasing the y-intercept translates the line upward, whereas decreasing the y-intercept
+translates it downward.
+
